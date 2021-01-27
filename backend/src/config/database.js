@@ -1,7 +1,19 @@
 const mongoose = require('mongoose')
-mongoose.Promise = global.Promise
-module.exports = mongoose.connect('mongodb://localhost:27017/organizze'
-    , { useNewUrlParser: true })
+
+const url = `mongodb+srv://dbUser:dbuser@cluster0.ljvnd.mongodb.net/organizze?retryWrites=true&w=majority`;
+
+const connectionParams = {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true
+}
+mongoose.connect(url, connectionParams)
+    .then(() => {
+        console.log('Connected to database ')
+    })
+    .catch((err) => {
+        console.error(`Error connecting to the database. \n${err}`);
+    })
 
 mongoose.Error.messages.general.required = "O atributo '{PATH}' é obrigatório."
 mongoose.Error.messages.Number.min = 
